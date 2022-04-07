@@ -36,18 +36,12 @@ namespace HW1
             Navigation.PushAsync(itemPage);
         }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
+        private void Stepper_ValueChanged(object sender, EventArgs e)
         {
-            var button = sender as Button;
-            foreach(Item i in items)
-            {
-                if(i.item_id.ToString() == button.ClassId)
-                {
-                    items.Remove(i);
-                    break;
-                }
-                
-            }
+            var stepper = sender as Stepper;
+            Item foundItem = items.Where(i => i.item_id == int.Parse(stepper.ClassId)).FirstOrDefault();
+            foundItem.item_count = Convert.ToInt32(stepper.Value);
+
         }
 
         private async void OrderButton_Clicked(object sender, EventArgs e)

@@ -3,6 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HW1.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Color x:Key="bgColor">#F47906</Color>
+            <Color x:Key="textColor">#fff</Color>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource bgColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource textColor}"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using System.ComponentModel;
 
 namespace HW1
 {
-    public class Item
-    {
+    public class Item : INotifyPropertyChanged {
         private static int lastId = 0;
 
         public Item()
@@ -17,10 +16,21 @@ namespace HW1
             get; set;
         }
 
+        private int ic;
+
         public int item_count
         {
-            get; set;
+            get {
+                return ic;
+            }
+            set {
+                if (ic != value) {
+                    ic = value;
+                    OnPropertyChanged("item_count");
+                }
+            }
         }
+
         public string item_image
         {
             get; set;
@@ -31,10 +41,11 @@ namespace HW1
             get;
         }
 
-
-        public void UpdateCount(int newCount)
-        {
-            item_count = newCount;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string property = "") {
+            if (PropertyChanged != null) {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
         }
     }
 }

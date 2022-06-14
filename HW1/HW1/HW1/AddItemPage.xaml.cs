@@ -23,40 +23,44 @@ namespace HW1 {
             { "Baikal", new ItemDescription() { Image = "Baikal.jpg", Description = "Русская кола"} }
         };
 
-        public Item SelectedItem {
-            get; private set;
-        } = null;
-
         public AddItemPage() {
             InitializeComponent();
             drinks.ItemsSource = drinksDependences.Keys.ToList();
             drinks.SelectedIndex = 0;
         }
 
-
-        private void IncreaseItem(string name, int count = 1) {
-            SelectedItem = new Item() { 
-                item_name = name, 
-                item_count = count,
-                item_image = drinksDependences[name].Image
-            };
-        }
-
         private void Button_Order(object sender, EventArgs e) {
-            IncreaseItem(drinks.SelectedItem.ToString(), Int32.Parse(count.Text));
+            Item selectedItem = new Item() {
+                item_name = drinks.SelectedItem.ToString(),
+                item_count = int.Parse(count.Text),
+                item_image = drinksDependences[drinks.SelectedItem.ToString()].Image
+            };
+
+            var found = MainPage.items.FirstOrDefault(x => x.item_name == selectedItem.item_name);
+            if (found != null) {
+                found.item_count += selectedItem.item_count;
+            }
+            else {
+                MainPage.items.Add(selectedItem);
+            }
+
             Navigation.PopAsync();
         }
 
         private void Button_Minus(object sender, EventArgs e) {
-            count.Text = ((Int32.Parse(count.Text)) - 1).ToString();
+            count.Text = int.Parse(count.Text) > min_limit ? 
+                (int.Parse(count.Text) - 1).ToString() : 
+                min_limit.ToString();
         }
 
         private void Button_Plus(object sender, EventArgs e) {
-            count.Text = ((Int32.Parse(count.Text)) + 1).ToString();
+            count.Text = int.Parse(count.Text) < max_limit ? 
+                (int.Parse(count.Text) + 1).ToString() : 
+                max_limit.ToString();
         }
 
-        private void count_TextChanged(object sender, TextChangedEventArgs e) {
-            if (UInt32.TryParse(e.NewTextValue, out var number)) {
+        private void count_Completed(object sender, EventArgs e) {
+            if (uint.TryParse((sender as Entry).Text, out var number)) {
                 if (number > max_limit) {
                     count.Text = max_limit.ToString();
                 }
@@ -69,7 +73,7 @@ namespace HW1 {
 
             }
             else {
-                count.Text = e.OldTextValue;
+                count.Text = "1";
             }
 
         }

@@ -7,7 +7,7 @@ using Xamarin.Forms;
 namespace HW1 {
 
     public partial class MainPage : ContentPage {
-        public ObservableCollection<Item> items = new ObservableCollection<Item>();
+        public static ObservableCollection<Item> items = new ObservableCollection<Item>();
 
         public MainPage() {
             InitializeComponent();
@@ -17,21 +17,6 @@ namespace HW1 {
 
         private void Button_Clicked(object sender, EventArgs e) {
             var itemPage = new AddItemPage();
-            itemPage.Disappearing += (_, __) => {
-                if (itemPage.SelectedItem != null) {
-                    var selectedItem = itemPage.SelectedItem;
-                    var found = items.FirstOrDefault(x => x.item_name == selectedItem.item_name);
-                    if (found != null) {
-                        found.item_count += selectedItem.item_count;
-                        if (found.item_count > 100) {
-                            found.item_count = 100;
-                        }
-                    }
-                    else {
-                        items.Add(selectedItem);
-                    }
-                }
-            };
             Navigation.PushAsync(itemPage);
         }
 

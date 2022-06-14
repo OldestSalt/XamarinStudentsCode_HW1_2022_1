@@ -18,7 +18,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Entry x:Name="count" TextChanged="count_TextChanged" Text="1" Placeholder="Enter count" Keyboard="Numeric" Grid.Column="0" Grid.RowSpan="2" BackgroundColor="#ddd"/>
+                <Entry x:Name="count" Completed="count_Completed" Text="1" Placeholder="Enter count" Keyboard="Numeric" Grid.Column="0" Grid.RowSpan="2" BackgroundColor="#ddd"/>
                 <Button Text="+" Clicked="Button_Plus" Grid.Column="1" Grid.Row="0" FontSize="12" FontAttributes="None"/>
                 <Button Text="-" Clicked="Button_Minus" Grid.Column="1" Grid.Row="1" FontSize="12" FontAttributes="None"/>
             </Grid>

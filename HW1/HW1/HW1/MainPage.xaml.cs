@@ -20,9 +20,12 @@ namespace HW1 {
             itemPage.Disappearing += (_, __) => {
                 if (itemPage.SelectedItem != null) {
                     var selectedItem = itemPage.SelectedItem;
-                    var found = items.Where(x => x.item_name == selectedItem.item_name).FirstOrDefault();
+                    var found = items.FirstOrDefault(x => x.item_name == selectedItem.item_name);
                     if (found != null) {
                         found.item_count += selectedItem.item_count;
+                        if (found.item_count > 100) {
+                            found.item_count = 100;
+                        }
                     }
                     else {
                         items.Add(selectedItem);
@@ -47,6 +50,16 @@ namespace HW1 {
 
         private void DeleteItem(object sender, EventArgs e) {
             items.Remove(items.FirstOrDefault(i => i.item_id == int.Parse((sender as Button).ClassId)));
+        }
+
+        private void IncreaseAmount(object sender, EventArgs e) {
+            var countLabel = ((sender as Button).Parent as Grid).Children[3] as Label;
+            countLabel.Text = (int.Parse(countLabel.Text) + 1).ToString();
+        }
+
+        private void DecreaseAmount(object sender, EventArgs e) {
+            var countLabel = ((sender as Button).Parent as Grid).Children[3] as Label;
+            countLabel.Text = (int.Parse(countLabel.Text) - 1).ToString();
         }
     }
 }

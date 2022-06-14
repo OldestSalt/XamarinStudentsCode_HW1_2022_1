@@ -4,7 +4,7 @@
              x:Class="HW1.MainPage"
              Title="Order">
 
-    <StackLayout Padding="10">
+    <StackLayout Padding="3, 5">
         <StackLayout x:Name="items_container">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
@@ -12,16 +12,20 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding item_image}" Grid.Column="0" HeightRequest="60"
                                    WidthRequest="60"></Image>
                             <Label Grid.Column="1" VerticalOptions="Center" Text="{Binding item_name}" FontSize="Medium"
                                    HorizontalOptions="FillAndExpand"/>
-                            <Label Grid.Column="2" VerticalOptions="Center" Text="{Binding item_count}" FontSize="Medium" />
-                            <Button Grid.Column="3" Text="x" Clicked="DeleteItem" ClassId="{Binding item_id}"/>
+                            <Button Grid.Column="2" Text="-" VerticalOptions="FillAndExpand" Clicked="DecreaseAmount"/>
+                            <Label Grid.Column="3" VerticalOptions="Center" Text="{Binding item_count, Mode=TwoWay}" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                            <Button Grid.Column="4" Text="+" VerticalOptions="FillAndExpand" Clicked="IncreaseAmount"/>
+                            <Button Grid.Column="5" Text="x" Clicked="DeleteItem" ClassId="{Binding item_id}" BackgroundColor="red"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>

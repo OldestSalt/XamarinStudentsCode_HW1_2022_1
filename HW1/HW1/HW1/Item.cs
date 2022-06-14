@@ -25,7 +25,15 @@ namespace HW1
             }
             set {
                 if (ic != value) {
-                    ic = value;
+                    if (value <= 0) {
+                        ic = 1;
+                    }
+                    else if (value > 100) {
+                        ic = 100;
+                    }
+                    else {
+                        ic = value;
+                    }
                     OnPropertyChanged("item_count");
                 }
             }

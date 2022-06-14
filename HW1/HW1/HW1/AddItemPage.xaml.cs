@@ -66,12 +66,12 @@ namespace HW1 {
                 else {
                     count.Text = number.ToString();
                 }
-                
+
             }
             else {
                 count.Text = e.OldTextValue;
             }
-            
+
         }
 
         private void drinks_SelectedIndexChanged(object sender, EventArgs e) {
